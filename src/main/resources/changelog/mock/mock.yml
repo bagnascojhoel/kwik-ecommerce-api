@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/liquibase/changelog-main.yml
+
+  - include:
+      file: categoria/loadData-categoria.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: produto/loadData-produto.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: categoria_produto/loadData-categoria_produto.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: produto_imagem/loadData-produto_imagem.yml
+      relativeToChangelogFile: true

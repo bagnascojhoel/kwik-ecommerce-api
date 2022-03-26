@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5.createTable-produto_imagem
+      author: jhoel.bagnasco
+      changes:
+        - createTable:
+            tableName: produto_imagem
+            columns:
+              - column:
+                  name: produto_imagem_id
+                  type: ${key}
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: produto_id
+                  type: ${key}
+                  constraints:
+                    foreignKeyName: fk_produto_imagem_produto_id
+                    references: produto(id)
+                    nullable: false
+              - column:
+                  name: url
+                  type: varchar(200)
+                  constraints:
+                    nullable: false

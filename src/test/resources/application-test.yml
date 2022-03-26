@@ -14,7 +14,7 @@ spring:
   liquibase:
     enabled: true
     contexts: test
-    change-log: classpath:/liquibase/changelog.yml
+    change-log: classpath:/liquibase/changelog-main.yml
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
 

@@ -9,9 +9,12 @@ kwik-ecommerce:
     port: ${APP_PORT:8080}
     context: /api
   api-info:
-    title: Kwik-Ecommerce API
-    description: API for the Kwik-Ecommerce website.
-    version: 0.0.1
+    title: Kwik Ecommerce API
+    description: API for Kwik Ecommerce.
+    version: 1.0.0
+  aws:
+    access-key: ${AWS_ACCESS_KEY:AKIAUESTIY2WWWFGESXG}
+    secret-key: ${AWS_SECRET_KEY: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}
 
 logging:
   level:
@@ -23,8 +26,8 @@ server:
     context-path: ${kwik-ecommerce.server.context}
 
 aws:
-  access-key: AKIAUESTIY2WWWFGESXG
-  secret-key: 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
+  access-key: ${kwik-ecommerce.aws.access-key}
+  secret-key: ${kwik-ecommerce.aws.secret-key}
   s3:
     bucket: kwik-ecommerce-dev
     region: us-east-1
@@ -37,6 +40,9 @@ spring:
 
   application:
     name: kwik-ecommerce-api
+
+  data.rest:
+    detection-strategy: ANNOTATED
 
   datasource:
     plataform: mysql
@@ -51,7 +57,7 @@ spring:
   liquibase:
     contexts: ${spring.profiles.active}
     enabled: true
-    change-log: classpath:/liquibase/changelog.yml
+    change-log: classpath:/changelog/changelog-main.yml
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
 
@@ -62,6 +68,6 @@ springdoc:
     path: /open-api-3/docs
   produces: application/json
   group-configs:
-    - group: v1
+    - group: default
       paths-to-match:
-        - /v1/**/*
+        - /**/*

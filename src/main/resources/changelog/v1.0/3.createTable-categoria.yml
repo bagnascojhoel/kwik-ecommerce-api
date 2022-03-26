@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3.createTable-categoria
+      author: jhoel.bagnasco
+      changes:
+        - createTable:
+            tableName: categoria
+            columns:
+              - column:
+                  name: id
+                  type: ${key}
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: titulo
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: empresa_id
+                  type: ${key}
+                  constraints:
+                    foreignKeyName: fk_categoria_empresa_id
+                    references: empresa(id)
+                    nullable: false
+              - column:
+                  name: criado_em
+                  type: timestamp
+                  defaultValueDate: ${now}
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alterado_em
+                  type: timestamp
+                  defaultValueDate: ${now}
+                  constraints:
+                    nullable: false
+        - createIndex:
+            indexName: ix_categoria_titulo
+            tableName: categoria
+            columns:
+              - column:
+                  name: titulo

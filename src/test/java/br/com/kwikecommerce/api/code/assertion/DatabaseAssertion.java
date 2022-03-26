@@ -1,6 +1,6 @@
 package br.com.kwikecommerce.api.code.assertion;
 
-import br.com.kwikecommerce.api.entity.AbstractEntity;
+import br.com.kwikecommerce.api.application.database.AbstractEntity;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 
@@ -17,9 +17,9 @@ public class DatabaseAssertion {
 
     // TODO: 05/07/2021 Adicionar ignoreFields 
     public <E extends AbstractEntity> void assertEquals(
-            Class<E> baseClass,
-            Long entityId,
-            E expected
+        Class<E> baseClass,
+        Long entityId,
+        E expected
     ) {
         E found = entityManager.find(baseClass, entityId);
 

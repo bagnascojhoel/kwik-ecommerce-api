@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - include:
+      file: 1.createTable-empresa.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 2.createTable-produto.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 3.createTable-categoria.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 4.createTable-categoria_produto.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 5.createTable-produto_imagem.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 6.insert-empresa-add-kwik-admin.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 7.createTable-pedido.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 8.createTable-pedido_item.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: 9.createTable-pedido_status.yml
+      relativeToChangelogFile: true

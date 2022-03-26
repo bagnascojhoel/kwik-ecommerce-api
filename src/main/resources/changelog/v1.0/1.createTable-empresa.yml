@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.createTable-empresa
+      author: jhoel.bagnasco
+      changes:
+        - createTable:
+            tableName: empresa
+            columns:
+              - column:
+                  name: id
+                  type: ${key}
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nome
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: endereco
+                  type: varchar(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telefone_whatsapp
+                  type: varchar(13)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: esta_ativo
+                  type: boolean
+                  defaultValue: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: criado_em
+                  type: timestamp
+                  defaultValueDate: ${now}
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alterado_em
+                  type: timestamp
+                  defaultValueDate: ${now}
+                  constraints:
+                    nullable: false
+
+        - createIndex:
+            indexName: ix_empresa_nome
+            tableName: empresa
+            columns:
+              - column:
+                  name: nome

@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4.createTable-categoria_produto
+      author: jhoel.bagnasco
+      changes:
+        - createTable:
+            tableName: categoria_produto
+            columns:
+              - column:
+                  name: produto_id
+                  type: ${key}
+                  constraints:
+                    foreignKeyName: fk_categoria_produto_produto_id
+                    references: produto(id)
+                    nullable: false
+              - column:
+                  name: categoria_id
+                  type: ${key}
+                  constraints:
+                    foreignKeyName: fk_categoria_produto_categoria_id
+                    references: categoria(id)
+                    nullable: false
