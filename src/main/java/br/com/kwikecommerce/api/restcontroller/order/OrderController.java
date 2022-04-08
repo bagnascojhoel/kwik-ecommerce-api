@@ -3,18 +3,19 @@ package br.com.kwikecommerce.api.restcontroller.order;
 import br.com.kwikecommerce.api.application.pagination.PageRequest;
 import br.com.kwikecommerce.api.application.pagination.PageResponseDto;
 import br.com.kwikecommerce.api.application.pagination.sort.NoSortOption;
+import br.com.kwikecommerce.api.order.OrderManagementMapper;
+import br.com.kwikecommerce.api.order.OrderManagementService;
+import br.com.kwikecommerce.api.order.OrderService;
 import br.com.kwikecommerce.api.restcontroller.order.dto.OrderCreationRequestDto;
 import br.com.kwikecommerce.api.restcontroller.order.dto.OrderFindingByFilterResponse;
 import br.com.kwikecommerce.api.restcontroller.order.dto.OrderFindingByIdResponseDto;
 import br.com.kwikecommerce.api.restcontroller.order.dto.OrderUpdateRequestDto;
-import br.com.kwikecommerce.api.order.OrderManagementMapper;
-import br.com.kwikecommerce.api.order.OrderManagementService;
-import br.com.kwikecommerce.api.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 @Validated
@@ -34,7 +35,7 @@ public class OrderController implements OrderApi {
     @Override
     @PostMapping
     public Long init(
-        @RequestHeader("companyId") Long companyId,
+        @RequestHeader("companyId") @NotNull Long companyId,
         @RequestBody @Valid OrderCreationRequestDto orderCreationRequestDto
     ) {
         return null;
@@ -42,7 +43,9 @@ public class OrderController implements OrderApi {
 
     @Override
     @GetMapping
-    public PageResponseDto<OrderFindingByFilterResponse> findByFilter(PageRequest<NoSortOption> pageRequest) {
+    public PageResponseDto<OrderFindingByFilterResponse> findByFilter(
+        @Valid PageRequest<NoSortOption> pageRequest
+    ) {
         return orderService.findByFilter(pageRequest);
     }
 

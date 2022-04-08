@@ -96,12 +96,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>${spring-doc.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
@@ -112,11 +106,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 
         <dependency>
@@ -190,23 +179,23 @@
         </profile>
 
         <profile>
-            <id>dev</id>
+            <id>development</id>
             <properties>
-                <activatedProperties>dev</activatedProperties>
+                <activatedProperties>development</activatedProperties>
             </properties>
         </profile>
 
         <profile>
-            <id>mocked</id>
+            <id>standalone</id>
             <properties>
-                <activatedProperties>mocked</activatedProperties>
+                <activatedProperties>standalone</activatedProperties>
             </properties>
         </profile>
 
         <profile>
-            <id>test</id>
+            <id>automation</id>
             <properties>
-                <activatedProperties>test</activatedProperties>
+                <activatedProperties>automation</activatedProperties>
             </properties>
         </profile>
 

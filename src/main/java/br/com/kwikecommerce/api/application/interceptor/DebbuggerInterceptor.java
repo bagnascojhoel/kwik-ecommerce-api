@@ -1,7 +1,6 @@
 package br.com.kwikecommerce.api.application.interceptor;
 
 import br.com.kwikecommerce.api.application.logging.LogService;
-import br.com.kwikecommerce.api.restcontroller.AuthenticationService;
 import br.com.kwikecommerce.api.application.message.MessageProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,6 @@ public class DebbuggerInterceptor implements HandlerInterceptor {
     private static final String USER_AGENT_HEADER = "user-agent";
 
     private final LogService logService;
-    private final AuthenticationService authenticationService;
 
     @Override
     public boolean preHandle(
@@ -27,9 +25,7 @@ public class DebbuggerInterceptor implements HandlerInterceptor {
         HttpServletResponse response,
         Object handler
     ) throws Exception {
-        var authentication = authenticationService.isAuthenticated()
-            ? authenticationService.getKeycloakId()
-            : NOT_AUTHENTICATED;
+        var authentication = NOT_AUTHENTICATED;
 
         var userAgent = request.getHeader(USER_AGENT_HEADER);
 
@@ -38,8 +34,8 @@ public class DebbuggerInterceptor implements HandlerInterceptor {
                 "log.debbugger-interceptor.before-request",
                 request.getMethod(),
                 request.getServletPath(),
-                userAgent,
-                authentication
+                authentication,
+                userAgent
             )
         );
 
@@ -53,9 +49,7 @@ public class DebbuggerInterceptor implements HandlerInterceptor {
         Object handler,
         Exception ex
     ) throws Exception {
-        var authentication = authenticationService.isAuthenticated()
-            ? authenticationService.getKeycloakId()
-            : NOT_AUTHENTICATED;
+        var authentication = NOT_AUTHENTICATED;
         var userAgent = request.getHeader(USER_AGENT_HEADER);
 
         logService.logInfo(
@@ -63,8 +57,8 @@ public class DebbuggerInterceptor implements HandlerInterceptor {
                 "log.debbugger-interceptor.after-request",
                 request.getMethod(),
                 request.getServletPath(),
-                userAgent,
-                authentication
+                authentication,
+                userAgent
             )
         );
 

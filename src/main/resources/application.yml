@@ -6,7 +6,7 @@ kwik-ecommerce:
     user: ${DB_USER:root}
     pass: ${DB_PASS:toor}
   server:
-    port: ${APP_PORT:8080}
+    port: ${APP_PORT:7957}
     context: /api
   api-info:
     title: Kwik Ecommerce API

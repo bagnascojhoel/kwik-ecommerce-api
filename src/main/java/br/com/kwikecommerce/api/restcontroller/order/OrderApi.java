@@ -30,7 +30,9 @@ public interface OrderApi {
     void cancel(Long orderId);
 
     @Operation(summary = "Finds orders valid for given filter")
-    PageResponseDto<OrderFindingByFilterResponse> findByFilter(PageRequest<NoSortOption> pageRequest);
+    PageResponseDto<OrderFindingByFilterResponse> findByFilter(
+        @Valid PageRequest<NoSortOption> pageRequest
+    );
 
     @Operation(summary = "Finds an order by its ID")
     OrderFindingByIdResponseDto findById(@OrderExists Long orderId);
