@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class PageRequest<T extends Enum> implements Pageable {
     @Schema(example = "3", minimum = "0")
     @NotNull
     @Min(0)
-    private Integer page = 0;
+    private Integer page;
 
     @Schema(
         description = "<prioritary field name> <ASC|DESC>; <secondary field name> <ASC|DESC>",
@@ -53,7 +54,7 @@ public class PageRequest<T extends Enum> implements Pageable {
 
     @Override
     public Sort getSort() {
-        return this.sort.getSort();
+        return Objects.nonNull(this.sort) ? this.sort.getSort() : Sort.unsorted();
     }
 
     @Override
