@@ -1,0 +1,20 @@
+server:
+  servlet.context-path: /api
+  port: 9000
+
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:migrations/changelog.xml
+    default-schema: common
+  datasource:
+    # TODO This won't work once I have more modules. Need to look into spring modulith.
+    url: jdbc:postgresql:kwik_ecommerce?currentSchema=product
+    username: kwik
+    password: kwik
+    driver-class-name: org.postgresql.Driver
+
+kwik:
+  logging:
+    blacklisted-headers:
+      - authorization

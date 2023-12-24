@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "title": "string",
+  "failedValidations": [
+    {
+      "field": "string",
+      "reason": "string"
+    }
+  ]
+}

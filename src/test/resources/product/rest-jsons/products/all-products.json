@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "productName": "Peperoni Pizza",
+      "productDescription": "The best pizza you'll ever eat!",
+      "productState": {
+        "code": "shown"
+      },
+      "imageUrl": "https://pizza-url.com",
+      "priceInBrl": "49.99"
+    },
+    {
+      "productName": "Double-Chesse Burguer",
+      "productDescription": "The best hamburguer you'll ever eat!",
+      "productState": {
+        "code": "hidden"
+      },
+      "imageUrl": "https://hamburguer-url.com",
+      "priceInBrl": "29.99"
+    }
+  ]
+}
