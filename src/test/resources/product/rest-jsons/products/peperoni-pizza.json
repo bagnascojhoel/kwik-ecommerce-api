@@ -1,17 +1,5 @@
 {
-<<<<<<< HEAD
-  "productId": "string",
-=======
-<<<<<<< HEAD
-  "productId": "string",
-=======
-<<<<<<< HEAD
-  "productId": "string",
-=======
   "productId": "70625cf4-66af-4177-ad5b-5befd870a8f6",
->>>>>>> 6b0331d (feat(api): create products CRUD)
->>>>>>> 47b2bca (feat(api): create products CRUD)
->>>>>>> 1b40fd0 (feat(api): create products CRUD)
   "productName": "Peperoni Pizza",
   "productDescription": "The best pizza you'll ever eat!",
   "productState": {

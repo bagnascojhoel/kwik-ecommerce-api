@@ -8,20 +8,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 @Getter
 public enum ProductState {
-    SHOWN("product-state-shown"),
-    HIDDEN("product-state-hidden"),
-    ARCHIVED("product-state-archived");
-
-    private final String code;
-    
-    @Nullable
-    public static ProductState getFromCode(@NonNull final String code) {
-        for (ProductState state : values()) {
-            if (state.getCode().equals(code)) {
-                return state;
-            }
-        }
-
-        return null;
-    }
+    SHOWN,
+    HIDDEN,
+    ARCHIVED;
 }

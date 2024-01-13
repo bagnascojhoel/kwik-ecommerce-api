@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(
         classes = KwikEcommerceApplication.class,
         properties = {
-                "spring.datasource.hikari.jdbc-url=" + TEST_CONTAINER_POSTGRES_JDBC_URL + "?currentSchema=product",
+                "spring.datasource.hikari.jdbc-url=" + TEST_CONTAINER_POSTGRES_JDBC_URL + "&currentSchema=product",
                 "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
         }
 )

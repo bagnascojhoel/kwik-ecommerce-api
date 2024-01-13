@@ -81,7 +81,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void passOnTransactionToRepository() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
             setupTransactionName("get-product-by-id");
 
             Mockito.
@@ -97,7 +97,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void throwsProductNotFound() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
 
             when(productRepository.findById(product.getId())).thenReturn(Optional.empty());
 
@@ -117,7 +117,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void passOnTransactionToRepository() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
             setupTransactionName("show-product");
 
             Mockito.
@@ -133,7 +133,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void throwsProductNotFound() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
 
             when(productRepository.findById(product.getId())).thenReturn(Optional.empty());
 
@@ -153,7 +153,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void passOnTransactionToRepository() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
             setupTransactionName("hide-product");
 
             Mockito.
@@ -169,7 +169,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void throwsProductNotFound() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
 
             when(productRepository.findById(product.getId())).thenReturn(Optional.empty());
 
@@ -190,7 +190,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void passOnTransactionToRepository() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
             setupTransactionName("archive-product");
 
             Mockito.
@@ -206,7 +206,7 @@ class ProductApplicationServiceTest extends AbstractApplicationServiceTest {
 
         @Test
         void throwsProductNotFound() {
-            Product product = Product.builder().build();
+            Product product = ProductDomainFixtures.PEPERONI_PIZZA;
 
             when(productRepository.findById(product.getId())).thenReturn(Optional.empty());
 

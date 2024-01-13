@@ -2,8 +2,7 @@ package br.com.bagnascojhoel.kwik_ecommerce.product;
 
 import br.com.bagnascojhoel.kwik_ecommerce.KwikEcommerceApplication;
 import br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductRepository;
-import br.com.bagnascojhoel.kwik_ecommerce.product.infrastructure.driving_ports.ProductRestFixtures;
-import br.com.bagnascojhoel.kwik_ecommerce.product.infrastructure.driving_ports.rest.RestBasePaths;
+import br.com.bagnascojhoel.kwik_ecommerce.product.driving_infra.rest.ProductRestFixtures;
 import io.restassured.http.ContentType;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -74,7 +73,7 @@ public class ProductModuleHappyPathIntegrationTest {
         given()
                 .body(loadJson(ProductRestFixtures.PEPERONI_PIZZA_JSON_PATH))
                 .contentType(ContentType.JSON)
-                .post(RestBasePaths.MANAGER_PRODUCTS)
+                .post("/products")
                 .then()
                 .statusCode(201);
     }
@@ -85,7 +84,7 @@ public class ProductModuleHappyPathIntegrationTest {
         productRepository.save(PEPERONI_PIZZA);
 
         given()
-                .get(RestBasePaths.MANAGER_PRODUCTS)
+                .get("/products")
                 .then()
                 .statusCode(200)
                 .body(not(isEmptyOrNullString()));
@@ -97,7 +96,7 @@ public class ProductModuleHappyPathIntegrationTest {
         productRepository.save(PEPERONI_PIZZA);
 
         given()
-                .get(RestBasePaths.CUSTOMER_PRODUCTS)
+                .get("/customer/products")
                 .then()
                 .statusCode(200)
                 .body(not(isEmptyOrNullString()));
@@ -109,41 +108,22 @@ public class ProductModuleHappyPathIntegrationTest {
         productRepository.save(PEPERONI_PIZZA);
 
         given()
-                .get(RestBasePaths.MANAGER_PRODUCTS + "/{productId}", PEPERONI_PIZZA.getId().toString())
+                .get("/products/{productId}", PEPERONI_PIZZA.getId().toString())
                 .then()
                 .statusCode(200);
     }
 
     @Test
-    @DisplayName("POST /products/{productId}/archive")
-    void postArchiveProduct() {
+    @DisplayName("PUT /products/{productId}/state")
+    void putProductState() {
         productRepository.save(PEPERONI_PIZZA);
 
         given()
-                .post(RestBasePaths.MANAGER_PRODUCTS + "/{productId}/archive", PEPERONI_PIZZA.getId().toString())
+                .body(loadJson(ProductRestFixtures.PRODUCT_STATE_SHOWN_JSON_PATH))
+                .contentType(ContentType.JSON)
+                .put("/products/{productId}/state", PEPERONI_PIZZA.getId().toString())
                 .then()
                 .statusCode(200);
     }
 
-    @Test
-    @DisplayName("POST /products/{productId}/hide")
-    void postHideProduct() {
-        productRepository.save(PEPERONI_PIZZA);
-
-        given()
-                .post(RestBasePaths.MANAGER_PRODUCTS + "/{productId}/hide", PEPERONI_PIZZA.getId().toString())
-                .then()
-                .statusCode(200);
-    }
-
-    @Test
-    @DisplayName("POST /products/{productId}/show")
-    void postShowProduct() {
-        productRepository.save(PEPERONI_PIZZA);
-
-        given()
-                .post(RestBasePaths.MANAGER_PRODUCTS + "/{productId}/show", PEPERONI_PIZZA.getId().toString())
-                .then()
-                .statusCode(200);
-    }
 }
