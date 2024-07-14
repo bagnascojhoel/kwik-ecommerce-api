@@ -17,7 +17,7 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
 
     private static final String START_TIME_ATTRIBUTE = "requestStartTime";
 
-    private final Set<String> blacklistedHeaders;
+    private final Set<String> whitelistedHeaders;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -64,11 +64,8 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
 
     private Map<String, String> getRequestHeaders(HttpServletRequest request) {
         // Convert header names to a readable format
-        return Collections.list(request.getHeaderNames())
-                .stream()
-                .collect(Collectors.toMap(
-                        headerName -> headerName,
-                        header -> blacklistedHeaders.contains(header) ? "<blacklisted>" : request.getHeader(header)
-                ));
+        return Collections.list(request.getHeaderNames()).stream()
+            .filter(whitelistedHeaders::contains)
+            .collect(Collectors.toMap(headerName -> headerName, request::getHeader));
     }
 }

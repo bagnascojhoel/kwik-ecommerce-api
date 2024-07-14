@@ -1,7 +1,12 @@
 package br.com.bagnascojhoel.kwik_ecommerce.product.driving_infra.rest;
 
+import static br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductDomainFixtures.DOUBLE_CHEESE_BURGUER;
+import static br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductDomainFixtures.PEPERONI_PIZZA;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 import br.com.bagnascojhoel.kwik_ecommerce.product.application.ProductApplicationService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -9,35 +14,30 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
-import java.util.List;
-
-import static br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductDomainFixtures.DOUBLE_CHEESE_BURGUER;
-import static br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductDomainFixtures.PEPERONI_PIZZA;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
 @Import({CustomerProductRestController.class, ProductDtoFactory.class})
 public class CustomerProductRestControllerTest extends AbstractRestControllerTest {
 
-    @MockBean
-    private ProductApplicationService productApplicationService;
+  @MockBean
+  private ProductApplicationService productApplicationService;
 
-    @Nested
-    class GetProducts {
-        @Test
-        @DisplayName("GET /customer/products - 200 OK")
-        void shouldBeAllCustomerProducts() {
-            Mockito.when(productApplicationService.findAllProductsToShowCustomers())
-                    .thenReturn(List.of(PEPERONI_PIZZA, DOUBLE_CHEESE_BURGUER));
+  @Nested
+  class GetProducts {
 
-            RestAssuredMockMvc
-                    .given()
-                    .get("/customer/products")
-                    .then()
-                    .statusCode(200)
-                    .body(matchesJsonSchemaInClasspath(ProductRestFixtures.ALL_PRODUCTS_JSON_PATH));
+    @Test
+    @DisplayName("GET /customer/products - 200 OK")
+    void shouldBeAllCustomerProducts() {
+      Mockito.when(productApplicationService.findAllProductsToShowCustomers())
+          .thenReturn(List.of(PEPERONI_PIZZA, DOUBLE_CHEESE_BURGUER));
 
-            Mockito.verify(productApplicationService).findAllProductsToShowCustomers();
-        }
+      RestAssuredMockMvc
+          .given()
+          .get("/customer/products")
+          .then()
+          .statusCode(200)
+          .body(matchesJsonSchemaInClasspath(ProductRestFixtures.ALL_PRODUCTS_JSON_PATH));
+
+      Mockito.verify(productApplicationService).findAllProductsToShowCustomers();
     }
+  }
 
 }

@@ -7,14 +7,20 @@ import lombok.Builder;
 import lombok.Getter;
 
 @AllArgsConstructor
-@Getter
 @Builder
 @JsonDeserialize(builder = EnumeratedValueDto.EnumeratedValueDtoBuilder.class)
 public class EnumeratedValueDto {
-    private final String code;
-    private final String label;
 
-    @JsonPOJOBuilder(withPrefix = "")
-    public static class EnumeratedValueDtoBuilder {
-    }
+  private final String code;
+  @Getter
+  private final String label;
+
+  public String getCode() {
+    return this.code.toUpperCase();
+  }
+
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class EnumeratedValueDtoBuilder {
+
+  }
 }

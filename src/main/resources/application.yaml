@@ -1,8 +1,10 @@
 server:
-  servlet.context-path: /api
   port: 9000
 
 spring:
+  web:
+    resources:
+      static-locations: classpath:/webjars/
   liquibase:
     enabled: true
     change-log: classpath:migrations/changelog.xml
@@ -14,7 +16,22 @@ spring:
     password: kwik
     driver-class-name: org.postgresql.Driver
 
+springdoc:
+  api-docs:
+    enabled: false
+    path: /docs/open-api
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  show-actuator: true
+  swagger-ui:
+    enabled: false
+    filter: true
+    path: /docs/swagger-ui
+    disable-swagger-default-url: true
+    try-it-out-enabled: true
+  packages-to-scan: br.com.bagnascojhoel.kwik_ecommerce
+
 kwik:
   logging:
-    blacklisted-headers:
-      - authorization
+    whitelisted-headers:
+      - content-type

@@ -5,7 +5,7 @@ Feature: Create, Read, Update, and Delete Products
     When they create a product with:
       | name  | description                     | priceInBrl | imageUrl |
       | Pizza | The best pizza you'll ever eat! | 50.00      |          |
-    Then they fetch the product by its id
+    Then they get the product "Pizza"
     And the product has:
       | name  | description                     | priceInBrl | imageUrl |
       | Pizza | The best pizza you'll ever eat! | 50.00      |          |
@@ -19,7 +19,7 @@ Feature: Create, Read, Update, and Delete Products
     When they update the product "Pizza" with:
       | name                           | description                     | priceInBrl | imageUrl |
       | Pizza Chicken and Cream-Cheese | The best pizza you'll ever eat! | 49.99      |          |
-    Then they fetch the product by its id
+    Then they get the product "Pizza"
     And the product has:
       | name                           | description                     | priceInBrl | imageUrl |
       | Pizza Chicken and Cream-Cheese | The best pizza you'll ever eat! | 49.99      |          |
@@ -30,8 +30,8 @@ Feature: Create, Read, Update, and Delete Products
     And they create a product with:
       | name  | description                     | priceInBrl | imageUrl |
       | Pizza | The best pizza you'll ever eat! | 50.00      |          |
-    When they show the product to customers
-    Then they fetch the product by its id
+    When they show the product "Pizza" to customers
+    Then they get the product "Pizza"
     And the product is shown to consumers
 
   Scenario: Hide a Product from Customers
@@ -39,8 +39,8 @@ Feature: Create, Read, Update, and Delete Products
     And they create a product with:
       | name  | description                     | priceInBrl | imageUrl |
       | Pizza | The best pizza you'll ever eat! | 50.00      |          |
-    When they hide the product from customers
-    Then they fetch the product by its id
+    When they hide the product "Pizza" from customers
+    Then they get the product "Pizza"
     And the product is hidden from consumers
 
   Scenario: Archive a Product
@@ -48,8 +48,8 @@ Feature: Create, Read, Update, and Delete Products
     And they create a product with:
       | name  | description                     | priceInBrl | imageUrl |
       | Pizza | The best pizza you'll ever eat! | 50.00      |          |
-    When they archive the product by its id
-    And they fetch the product by its id
+    When they archive the product "Pizza"
+    And they get the product "Pizza"
     Then the product is archived
 
   Scenario: Find All Products to Show to Customers
@@ -59,8 +59,8 @@ Feature: Create, Read, Update, and Delete Products
       | Pizza            | The best pizza you'll ever eat!      | 50.00      |          |
       | Hamburguer       | The best hamburguer you'll ever eat! | 25.00      |          |
       | Brazilian Pastel | Choose this.                         | 21.50      |          |
-    And they show the "Brazilian Pastel" product
-    And they archive the "Hamburguer" product
+    And they show the product "Brazilian Pastel" to customers
+    And they archive the product "Hamburguer"
     When they fetch all products to show customers
     Then the following products are returned:
       | name             | description  | priceInBrl | imageUrl |

@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/customer/products")
 @AllArgsConstructor
-public class CustomerProductRestController {
+public class CustomerProductRestController implements CustomerProductRestApi {
 
-    private final ProductApplicationService productApplicationService;
+  private final ProductApplicationService productApplicationService;
 
-    private final ProductDtoFactory productDtoFactory;
+  private final ProductDtoFactory productDtoFactory;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public ProductCollectionDto getProducts() {
-        return productDtoFactory.createCollection(
-                productApplicationService.findAllProductsToShowCustomers()
-        );
-    }
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public ProductCollectionDto getProducts() {
+    return productDtoFactory.createCollection(
+        productApplicationService.findAllProductsToShowCustomers()
+    );
+  }
 
 }
