@@ -34,11 +34,11 @@ public class ManagementProductRestController implements ManagementProductRestApi
   @PatchMapping("/{productId}")
   @ResponseStatus(HttpStatus.OK)
   public ProductDto patchProduct(
-      @PathVariable final ProductId productId,
+      @PathVariable final String productId,
       @RequestBody final ProductDto dto
   ) {
     var saveProduct = productDtoFactory.createSaveCommand(dto);
-    var product = productApplicationService.saveProduct(productId, saveProduct);
+    var product = productApplicationService.saveProduct(new ProductId(productId), saveProduct);
     return productDtoFactory.create(product);
   }
 
@@ -50,9 +50,9 @@ public class ManagementProductRestController implements ManagementProductRestApi
 
   @GetMapping("/{productId}")
   @ResponseStatus(HttpStatus.OK)
-  public ProductDto getProduct(@PathVariable final ProductId productId) {
+  public ProductDto getProduct(@PathVariable final String productId) {
     return productDtoFactory.create(
-        productApplicationService.getProductById(productId)
+        productApplicationService.getProductById(new ProductId(productId))
     );
   }
 

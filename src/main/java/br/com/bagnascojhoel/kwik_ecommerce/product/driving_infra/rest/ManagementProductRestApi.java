@@ -1,6 +1,5 @@
 package br.com.bagnascojhoel.kwik_ecommerce.product.driving_infra.rest;
 
-import br.com.bagnascojhoel.kwik_ecommerce.product.domain.ProductId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,11 +23,11 @@ public interface ManagementProductRestApi {
   ProductCollectionDto getProducts();
 
   @Operation(summary = "Gets a single product by its ID")
-  ProductDto getProduct(final ProductId productId);
+  ProductDto getProduct(final String productId);
 
   @Operation(summary = "Updates a product with the filled properties")
   ProductDto patchProduct(
-      @Schema(type = "string") final ProductId productId,
+      @Schema(type = "string") final String productId,
       final ProductDto productDto
   );
 

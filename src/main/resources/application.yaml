@@ -35,3 +35,5 @@ kwik:
   logging:
     whitelisted-headers:
       - content-type
+    blacklisted-paths:
+      - /docs/**/*

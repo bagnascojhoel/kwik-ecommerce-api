@@ -8,8 +8,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @EnableConfigurationProperties
 @Configuration
 public class PropertyConfiguration {
-    @Bean
-    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
+
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
 }
