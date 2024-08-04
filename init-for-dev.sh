@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the source and destination directories
-source_dir="githooks"
+source_dir="dev-tools/githooks"
 destination_dir="../.git/modules/kwik-ecommerce-api/hooks"
 
 # Check if the source directory exists

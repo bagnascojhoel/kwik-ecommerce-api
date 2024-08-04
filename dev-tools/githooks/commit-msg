@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Define the allowed types and scopes for conventional commits.
 types="build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test"
@@ -7,7 +7,7 @@ types="build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test"
 conventional_commit_regex="^(${types})(\((.+)\))?!?: .+$"
 
 # Get the commit message from the provided file path.
-commit_message=$(cat "$1")
+commit_message=$(cat $1)
 
 # ANSI color codes for formatting output.
 color_reset='\033[0m'     # Text Reset
@@ -16,15 +16,15 @@ color_red='\033[31m'      # Red
 
 # Check if the commit message meets the conventional commit standards.
 if [[ "$commit_message" =~ $conventional_commit_regex ]]; then
-   echo "
+   echo -e "
    ${color_green}The commit message adheres to conventional commit standards.${color_reset}
-   
+
    "
    exit 0
 fi
 
 # Print an error message if the commit message does not meet the standard.
-echo "
+echo -e "
 
 ${color_red}Error: The commit message does not meet the conventional commit standard.${color_reset}
 
