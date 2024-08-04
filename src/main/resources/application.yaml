@@ -11,20 +11,18 @@ spring:
     default-schema: common
   datasource:
     # TODO This won't work once I have more modules. Need to look into spring modulith.
-    url: jdbc:postgresql:kwik_ecommerce?currentSchema=product
-    username: kwik
-    password: kwik
+    url: ${DATABASE_URL}
     driver-class-name: org.postgresql.Driver
 
 springdoc:
   api-docs:
-    enabled: false
+    enabled: true
     path: /docs/open-api
   default-produces-media-type: application/json
   default-consumes-media-type: application/json
   show-actuator: true
   swagger-ui:
-    enabled: false
+    enabled: true
     filter: true
     path: /docs/swagger-ui
     disable-swagger-default-url: true
