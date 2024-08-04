@@ -9,10 +9,6 @@ plugins {
 group = 'br.com.bagnascojhoel'
 version = 'beta'
 
-java {
-    sourceCompatibility = '21'
-}
-
 repositories {
     mavenCentral()
 }
@@ -22,6 +18,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.modulith:spring-modulith-starter-core'
     implementation 'org.springframework.modulith:spring-modulith-starter-jdbc'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.5.0'
@@ -55,10 +52,64 @@ dependencyManagement {
     }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+java {
+    sourceCompatibility = '17'
+    manifest {
+        attributes(
+                "Implementation-Title": project.group + "." + project.name,
+                "Implementation-Version": project.version
+        )
+    }
 }
 
 bootRun {
     systemProperty 'spring.profiles.active', 'local'
+}
+
+graalvmNative {
+    binaries {
+        configureEach {
+            resources.autodetect()
+        }
+
+        main {
+            imageName = "${project.name}-${project.version}"
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    jvmArgs "-agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image"
+}
+
+tasks.register("testOnly", Test) {
+    group "verification"
+    useJUnitPlatform()
+}
+
+tasks.named('processTestAot') {
+    enabled = false
+}
+
+tasks.named('build') {
+    dependsOn clean
+}
+
+tasks.named("nativeCompile") {
+    dependsOn test
+}
+
+tasks.register("nativeCompileDocker", Exec) {
+    group "build"
+    dependsOn nativeCompile
+
+    commandLine 'docker',
+            'image',
+            'build',
+            '--build-arg',
+            "ARTIFACT=${project.name}-${version}",
+            '-t', "${project.name}:${version}",
+            '-t', "${project.name}:latest",
+            '.'
 }

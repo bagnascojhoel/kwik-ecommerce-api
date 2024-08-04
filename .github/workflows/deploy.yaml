@@ -1,0 +1,48 @@
+name: Deploy workflow
+
+on:
+  push:
+    branches: [ 'main' ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'flyio'
+  cancel-in-progress: true
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: 17
+
+      - name: Setup fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Gradle build source
+        run: ./gradlew clean build
+
+      - name: Gradle build Docker image
+        run: ./gradlew nativeCompileDocker
+
+      - name: Deploy to fly.io
+        run: flyctl deploy --local-only --auto-confirm
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_DEPLOY_SECRET }}
