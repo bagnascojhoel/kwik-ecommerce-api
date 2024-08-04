@@ -11,7 +11,9 @@ spring:
     default-schema: common
   datasource:
     # TODO This won't work once I have more modules. Need to look into spring modulith.
-    url: ${DATABASE_URL}
+    url: jdbc:postgres:${POSTGRES_HOSTNAME}:5432/kwik-ecommerce-db
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASS}
     driver-class-name: org.postgresql.Driver
 
 springdoc:
