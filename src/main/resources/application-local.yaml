@@ -6,7 +6,6 @@ springdoc:
 
 spring:
   datasource:
-    # TODO This won't work once I have more modules. Need to look into spring modulith.
     url: jdbc:postgresql:kwik_ecommerce?currentSchema=product
     username: kwik
     password: kwik

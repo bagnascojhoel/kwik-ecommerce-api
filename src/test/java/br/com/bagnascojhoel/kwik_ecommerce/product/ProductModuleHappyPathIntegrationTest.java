@@ -31,8 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
     // TODO Change this to spin-up only the module, not the whole application
     classes = KwikEcommerceApplication.class,
     properties = {
-        "spring.datasource.hikari.jdbc-url=" + TEST_CONTAINER_POSTGRES_JDBC_URL
-            + "?currentSchema=product",
+        "spring.datasource.url=" + TEST_CONTAINER_POSTGRES_JDBC_URL,
         "spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver"
     }
 )

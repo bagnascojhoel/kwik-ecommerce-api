@@ -10,8 +10,7 @@ spring:
     change-log: classpath:migrations/changelog.xml
     default-schema: common
   datasource:
-    # TODO This won't work once I have more modules. Need to look into spring modulith.
-    url: jdbc:postgresql:${POSTGRES_HOSTNAME}:5432/kwik-ecommerce-db
+    url: jdbc:postgresql://${POSTGRES_HOSTNAME}/kwik_ecommerce_db
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASS}
     driver-class-name: org.postgresql.Driver
