@@ -3,6 +3,10 @@ name: Deploy workflow
 on:
   push:
     branches: [ 'main' ]
+    paths-ignore:
+      - dev-tools
+      - init-for-dev.sh
+      - README.md
 
   workflow_dispatch:
 
