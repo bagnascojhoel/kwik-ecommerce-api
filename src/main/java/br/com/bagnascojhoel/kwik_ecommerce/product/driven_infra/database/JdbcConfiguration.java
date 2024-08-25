@@ -14,7 +14,7 @@ public class JdbcConfiguration {
 
   @Bean("productDataSource")
   public DataSource dataSource(DataSourceProperties dataSourceProperties) {
-    final String connectionUrl = dataSourceProperties.getUrl().concat("?currentSchema=product");
+    final String connectionUrl = dataSourceProperties.getUrl().concat("&currentSchema=product");
     return dataSourceProperties.initializeDataSourceBuilder().url(connectionUrl).build();
   }
 
