@@ -24,15 +24,10 @@ if [[ "$commit_message" =~ $conventional_commit_regex ]]; then
 fi
 
 # Print an error message if the commit message does not meet the standard.
-echo -e "
-
-${color_red}Error: The commit message does not meet the conventional commit standard.${color_reset}
+echo -e "${color_red}Error: The commit message does not meet the conventional commit standard.${color_reset}
 
 For this project, you can use:
    - Types: ${types}
    
-More details at: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
-
-
-"
+More details at: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)"
 exit 1
