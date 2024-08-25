@@ -62,7 +62,12 @@ java {
     }
 }
 
+tasks.named('classes') {
+    dependsOn 'clean'
+}
+
 bootRun {
+    dependsOn 'classes'
     systemProperty 'spring.profiles.active', 'local'
 }
 
@@ -78,11 +83,6 @@ graalvmNative {
     }
 }
 
-test {
-    useJUnitPlatform()
-    jvmArgs "-agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image"
-}
-
 tasks.register("testOnly", Test) {
     group "verification"
     useJUnitPlatform()
@@ -90,10 +90,6 @@ tasks.register("testOnly", Test) {
 
 tasks.named('processTestAot') {
     enabled = false
-}
-
-tasks.named('build') {
-    dependsOn clean
 }
 
 tasks.named("nativeCompile") {
