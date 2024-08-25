@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-devtools:3.1.5'
+    implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -62,10 +62,6 @@ java {
     }
 }
 
-tasks.named('classes') {
-    dependsOn 'clean'
-}
-
 bootRun {
     dependsOn 'classes'
     systemProperty 'spring.profiles.active', 'local'
@@ -83,13 +79,18 @@ graalvmNative {
     }
 }
 
+test {
+    useJUnitPlatform()
+    jvmArgs "-agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image"
+}
+
+tasks.named('classes') {
+    dependsOn 'clean'
+}
+
 tasks.register("testOnly", Test) {
     group "verification"
     useJUnitPlatform()
-}
-
-tasks.named('processTestAot') {
-    enabled = false
 }
 
 tasks.named("nativeCompile") {
@@ -108,4 +109,8 @@ tasks.register("nativeCompileDocker", Exec) {
             '-t', "${project.name}:${version}",
             '-t', "${project.name}:latest",
             '.'
+}
+
+tasks.named('processTestAot') {
+    enabled = false
 }
