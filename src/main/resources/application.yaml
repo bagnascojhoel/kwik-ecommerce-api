@@ -10,7 +10,7 @@ spring:
     change-log: classpath:migrations/changelog.xml
     default-schema: common
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOSTNAME}/kwik_ecommerce_db?ssl=true
+    url: jdbc:postgresql://${POSTGRES_HOSTNAME}/kwik_ecommerce_db?ssl=false
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASS}
     driver-class-name: org.postgresql.Driver
